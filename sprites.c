@@ -72,9 +72,9 @@ void	ft_sort_sprites(t_cub *cub)
 				tmp = cub->sprites[j].distance;
 				cub->sprites[j].distance = cub->sprites[j + 1].distance;
 				cub->sprites[j + 1].distance = tmp;
-				tmp = cub->sprites[j].order;
-				cub->sprites[j].order = cub->sprites[j + 1].order;
-				cub->sprites[j + 1].order = (int)tmp;
+				// tmp = cub->sprites[j].order;
+				// cub->sprites[j].order = cub->sprites[j + 1].order;
+				// cub->sprites[j + 1].order = (int)tmp;
 			}
 		}
 	}

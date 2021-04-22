@@ -196,7 +196,7 @@ int  read_keys(t_cub *cub)
       cub->ray.planeX = cub->ray.planeX * cos(r_speed) - cub->ray.planeY * sin(r_speed);
       cub->ray.planeY = oldPlaneX * sin(r_speed) + cub->ray.planeY * cos(r_speed);
     }
-    //rotate to the left
+    // rotate to the left
     if (cub->key.left == 1)
     {
       //both camera direction and camera plane must be rotated
@@ -220,15 +220,15 @@ int  read_keys(t_cub *cub)
     //     cub->ray.playerX -= oldplayerX - m_speed;
     // }
 
-    if (cub->key.stepl == 1)
-    {
-      double oldplayerY = cub->ray.playerY;
-      if(cub->map[(int)(cub->ray.playerY - cub->ray.dirY * m_speed)][(int)(cub->ray.playerX)] != '1')
-        cub->ray.playerY -= oldplayerY - cub->ray.dirY * m_speed;
-      double oldplayerX = cub->ray.playerX;
-      if(cub->map[(int)(cub->ray.playerY)][(int)(cub->ray.playerX - cub->ray.dirX * m_speed)] != '1')
-        cub->ray.playerX -= oldplayerX - cub->ray.dirX * m_speed;
-    }
+    // if (cub->key.stepl == 1)
+    // {
+    //   double oldplayerY = cub->ray.playerY;
+    //   if(cub->map[(int)(cub->ray.playerY - cub->ray.dirY * m_speed)][(int)(cub->ray.playerX)] != '1')
+    //     cub->ray.playerY -= oldplayerY - cub->ray.dirY * m_speed;
+    //   double oldplayerX = cub->ray.playerX;
+    //   if(cub->map[(int)(cub->ray.playerY)][(int)(cub->ray.playerX - cub->ray.dirX * m_speed)] != '1')
+    //     cub->ray.playerX -= oldplayerX - cub->ray.dirX * m_speed;
+    // }
 
     ray_casting(cub);
     return (0);
