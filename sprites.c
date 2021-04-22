@@ -31,27 +31,52 @@ int		ft_cnt_sprites(t_cub *cub)
     return (0);
 }
 
-void			ft_sort_sprites(t_cub *cub)
-{
-	int			i;
-	int			j;
-	t_sprite	tmp;
+// void			ft_sort_sprites(t_cub *cub)
+// {
+// 	int			i;
+// 	int			j;
+// 	t_sprite	tmp;
 
-	j = 0;
-	while (j < cub->sprcast.cnt - 1)
+// 	j = 0;
+// 	while (j < cub->sprcast.cnt - 1)
+// 	{
+// 		i = 0;
+// 		while (i < cub->sprcast.cnt - 1)
+// 		{
+// 			if (cub->sprites[i].distance < cub->sprites[i + 1].distance)
+// 			{
+// 				tmp = cub->sprites[i];
+// 				cub->sprites[i] = cub->sprites[i + 1];
+// 				cub->sprites[i + 1] = tmp;
+// 			}
+// 			i++;
+// 		}
+// 		j++;
+// 	}
+// }
+
+void	ft_sort_sprites(t_cub *cub)
+{
+	int		i;
+	int		j;
+	double	tmp;
+
+	i = -1;
+	while (++i < cub->sprcast.cnt)
 	{
-		i = 0;
-		while (i < cub->sprcast.cnt - 1)
+		j = -1;
+		while (++j < cub->sprcast.cnt - 1)
 		{
-			if (cub->sprites[i].distance < cub->sprites[i + 1].distance)
+			if (cub->sprites[j].distance < cub->sprites[j + 1].distance)
 			{
-				tmp = cub->sprites[i];
-				cub->sprites[i] = cub->sprites[i + 1];
-				cub->sprites[i + 1] = tmp;
+				tmp = cub->sprites[j].distance;
+				cub->sprites[j].distance = cub->sprites[j + 1].distance;
+				cub->sprites[j + 1].distance = tmp;
+				tmp = cub->sprites[j].order;
+				cub->sprites[j].order = cub->sprites[j + 1].order;
+				cub->sprites[j + 1].order = (int)tmp;
 			}
-			i++;
 		}
-		j++;
 	}
 }
 
