@@ -10,6 +10,7 @@ SRCS = cub3d.c\
 		ft_lstnew.c\
 		ft_lstsize.c\
 		ft_putendl_fd.c\
+		save.c\
 		sprites.c
 	   
 

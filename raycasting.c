@@ -303,6 +303,11 @@ int             draw(t_cub *cub)
     // cub->img.addr = mlx_get_data_addr(cub->img.img, &cub->img.bits_per_pixel, &cub->img.line_length, &cub->img.endian);
     ray_casting(cub);
     cast_sprites(cub);
+	  if (cub->list.save == 1)
+	  {
+	  screenshot(cub);
+	  return(0);
+	  }
     mlx_hook(cub->win, 2, 1L<<0, &key_press, cub);
     mlx_hook(cub->win, 3, 1L<<1, &key_release, cub);
     // mlx_hook(cub->win, 17, 0L, &button_press, cub);

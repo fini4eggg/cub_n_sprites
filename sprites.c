@@ -9,13 +9,12 @@ int		ft_cnt_sprites(t_cub *cub)
     cub->sprites = (t_sprite *)malloc(sizeof(t_sprite) * cub->sprcast.cnt);
     if (!cub->sprites)
       return (0000000000000000);
-    i = 0;
+    i = -1;
     x = 0;
-    j = 0;
-    while (i < cub->map_h)
+    while (++i < cub->map_h)
     {
-        j = 0;
-        while (cub->map[i][j])
+        j = -1;
+        while (cub->map[i][++j])
         {
             if (cub->map[i][j] == '2')
             {
@@ -24,36 +23,10 @@ int		ft_cnt_sprites(t_cub *cub)
                 cub->sprites[x].y = i + 0.5;
                 x++;
             }
-            j++;
         }
-        i++;
     }
     return (0);
 }
-
-// void			ft_sort_sprites(t_cub *cub)
-// {
-// 	int			i;
-// 	int			j;
-// 	t_sprite	tmp;
-
-// 	j = 0;
-// 	while (j < cub->sprcast.cnt - 1)
-// 	{
-// 		i = 0;
-// 		while (i < cub->sprcast.cnt - 1)
-// 		{
-// 			if (cub->sprites[i].distance < cub->sprites[i + 1].distance)
-// 			{
-// 				tmp = cub->sprites[i];
-// 				cub->sprites[i] = cub->sprites[i + 1];
-// 				cub->sprites[i + 1] = tmp;
-// 			}
-// 			i++;
-// 		}
-// 		j++;
-// 	}
-// }
 
 void	ft_sort_sprites(t_cub *cub)
 {
@@ -72,9 +45,9 @@ void	ft_sort_sprites(t_cub *cub)
 				tmp = cub->sprites[j].distance;
 				cub->sprites[j].distance = cub->sprites[j + 1].distance;
 				cub->sprites[j + 1].distance = tmp;
-				// tmp = cub->sprites[j].order;
-				// cub->sprites[j].order = cub->sprites[j + 1].order;
-				// cub->sprites[j + 1].order = (int)tmp;
+				tmp = cub->sprites[j].order;
+				cub->sprites[j].order = cub->sprites[j + 1].order;
+				cub->sprites[j + 1].order = (int)tmp;
 			}
 		}
 	}

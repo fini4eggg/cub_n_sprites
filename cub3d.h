@@ -26,6 +26,7 @@ typedef struct	s_params
 	char		*s_path;
 	int			flclr;
 	int			clclr;
+	int			save;
 	int			params_fillment;
 	char		**map;
 	int			player;
@@ -113,8 +114,15 @@ typedef struct s_spritecast
     int 		texY;
 	int			cnt;
 	int			color;
-}		t_spritecast;
+}			t_spritecast;
 
+typedef struct s_bmp
+{
+	unsigned char	*header[54];
+	int				size;
+	int				fd;
+	int				color;
+}				t_bmp;
 
 typedef struct s_cub
 {
@@ -135,6 +143,7 @@ typedef struct s_cub
 	t_data			current;
 	t_sprite		*sprites;
 	t_spritecast	sprcast;
+	t_bmp			bmp;
 }				t_cub;
 
 int			get_next_line(int fd, char **line);
@@ -143,5 +152,7 @@ int			draw(t_cub *cub);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void        set_sprites(t_cub *cub);
 void        cast_sprites(t_cub *cub);
+// void		create_bmp(t_cub *cub);
+void		screenshot(t_cub *cub);
 
 #endif

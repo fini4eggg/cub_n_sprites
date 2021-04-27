@@ -381,7 +381,7 @@ static void	ft_init(t_cub *cub)
 
 int	 	main(int argc, char **argv)
 {
-	int	 		fd = open("map.cub", O_RDONLY);			//
+	int	 		fd;			//
 	char		*line = NULL; 							/// посмотреть норму
 	// t_params 	list;
 	t_cub		*cub;
@@ -394,13 +394,21 @@ int	 	main(int argc, char **argv)
 		exit (1);
 	}
 	ft_init(cub);
-	if (argc == 0 || argc > 2)
+	if (argc == 3)
+	{
+		if (!(ft_strncmp("--save", argv[1], ft_strlen(argv[1]))))
+			cub->list.save = 1;
+		fd = open(argv[2], O_RDONLY);
+	}
+	if (argc == 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		cub->list.save = 0;
+	}
+	if (argc == 0 || argc > 3)
 		return (0); // проверка на количество аргументов
 	if (!argv)
 		return (0); // HUY
-	// ft_bzero(&cub, sizeof(cub));
-	// ft_bzero(&cub->list, sizeof(cub->list));
-	// ft_bzero(&cub->ray, sizeof(cub->ray));
 	cub->sprcast.cnt = 0;
 	while (get_next_line(fd, &line))
 	{
