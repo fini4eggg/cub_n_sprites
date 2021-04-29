@@ -394,7 +394,7 @@ int	 	main(int argc, char **argv)
 		exit (1);
 	}
 	ft_init(cub);
-	if (argc == 3)
+	if (argc == 3)	
 	{
 		if (!(ft_strncmp("--save", argv[1], ft_strlen(argv[1]))))
 			cub->list.save = 1;

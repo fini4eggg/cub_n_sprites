@@ -34,14 +34,14 @@ typedef struct	s_params
 
 typedef struct  s_data 
 {
-    void        *img;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
+	void		*img;
+	char		*addr;
+	int		 bits_per_pixel;
+	int		 line_length;
+	int		 endian;
 	int			width;
 	int			height;
-}               t_data;
+}			   t_data;
 
 typedef struct	s_ray
 {
@@ -82,8 +82,8 @@ typedef struct s_key
 	int		left;
 	int		right;
 	int		stepl;
-	// int		stepr;
-	// int		exit;
+	int		stepr;
+	int		exit;
 }				t_key;
 
 typedef struct s_sprite
@@ -98,20 +98,20 @@ typedef struct s_spritecast
 {
 	double		*zbuffer;
 	double 		spriteX;
-    double 		spriteY;
+	double 		spriteY;
 	double 		invDet;
-    double 		transformX;
-    double 		transformY;
-    int 		spriteScreenX;
+	double 		transformX;
+	double 		transformY;
+	int 		spriteScreenX;
 	int 		spriteHeight;
-    int 		drawStartY;
-    int 		drawEndY;
-    int 		spriteWidth;
-    int 		drawStartX;
-    int 		drawEndX;
+	int 		drawStartY;
+	int 		drawEndY;
+	int 		spriteWidth;
+	int 		drawStartX;
+	int 		drawEndX;
 	int 		texX;
 	int 		d;
-    int 		texY;
+	int 		texY;
 	int			cnt;
 	int			color;
 }			t_spritecast;
@@ -150,8 +150,8 @@ int			get_next_line(int fd, char **line);
 int			ray_casting(t_cub *cub);
 int			draw(t_cub *cub);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void        set_sprites(t_cub *cub);
-void        cast_sprites(t_cub *cub);
+void		set_sprites(t_cub *cub);
+void		cast_sprites(t_cub *cub);
 // void		create_bmp(t_cub *cub);
 void		screenshot(t_cub *cub);
 
