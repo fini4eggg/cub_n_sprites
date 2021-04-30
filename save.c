@@ -26,7 +26,7 @@ void	screenshot(t_cub *cub)
 
 	res = cub->list.width;
 	size = 54 + (cub->list.width * cub->list.height) * 4;
-	fd = open("screenshot.bmp", O_CREAT | O_RDWR, 0666);
+	fd = open("screenshot.bmp", O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
 		exit(0);
 	head(fd, cub, res, size);

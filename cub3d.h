@@ -145,6 +145,39 @@ typedef struct s_cub
 	t_spritecast	sprcast;
 	t_bmp			bmp;
 }				t_cub;
+// parser.c
+int	 	check_resol_posit(char **res, t_params *list);
+int	 	check_resol(char *line, t_params *list);
+int	 	check_so_path(char *line, t_params *list);
+int	 	check_no_path(char *line, t_params *list);
+int	 	check_we_path(char *line, t_params *list);
+int	 	check_ea_path(char *line, t_params *list);
+int	 	check_s_path(char *line, t_params *list);
+int	 	check_floor_path(char *line, t_params *list);
+int	 	check_celing_path(char *line, t_params *list);
+int	 	check_params_fill(t_params *list);
+int	 	check_params(char *line, t_params *list);
+char	**make_map(t_list **head, int size);
+int		make_rectangle(t_cub *cub, char **map);
+int 	check_char(int c, char *compare);
+int		check_around(char **map, int i, int j, char *compare);
+void	set_player(t_cub *cub);
+int		check_validity(char **map, t_cub *cub);
+void	ft_init(t_cub *cub);
+// raycasting.c
+void	check_max_res(t_cub *cub);
+void	check_max_res(t_cub *cub);
+void 	init_txt(t_cub *cub);
+int 	key_release(int key, t_cub *cub);
+int 	key_press(int key, t_cub *cub);
+int		read_keys(t_cub *cub);
+int		ray_casting(t_cub *cub);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void 	draw_walls(t_cub *cub, int x);
+void 	chose_txt(t_cub *cub);
+void 	dda(t_cub *cub);
+void	calc_steps(t_cub *cub);
+void	wall_cast(t_cub *cub, int x);
 
 int			get_next_line(int fd, char **line);
 int			ray_casting(t_cub *cub);

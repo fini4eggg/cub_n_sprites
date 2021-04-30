@@ -3,6 +3,9 @@ HEADER = cub3d.h
 SRCS = cub3d.c\
 		get_next_line_utils.c\
 		get_next_line.c\
+		map_validate.c\
+		params_check.c\
+		path_check.c\
 		parser.c\
 		raycasting.c\
 		ft_lstadd_back.c\

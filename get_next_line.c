@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bryella <bryella@student.42lyon.fr>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/02 04:28:46 by bryella           #+#    #+#             */
-/*   Updated: 2021/03/19 22:02:21 by bryella          ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 
 static char	*check_remainder(char **remainder, char **line)
@@ -68,19 +56,3 @@ int			get_next_line(int fd, char **line)
 	}
 	return ((read_bytes || (remainder)) ? 1 : 0);
 }
-
-// int			main(void)
-// {
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open("map.cub", O_RDONLY);
-// 	while (get_next_line(fd, &line))
-// 	{
-// 		printf("%s\n", line);
-// 		free(line);
-// 	}
-// 	printf("%s\n", line);
-// 	// free(line);
-// 	return(0);
-// }

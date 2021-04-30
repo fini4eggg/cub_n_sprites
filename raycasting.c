@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	 wall_cast(t_cub *cub, int x)
+void	 wall_cast(t_cub *cub, int x)
 {
 	cub->ray.cameraX = 2 * x / (double)cub->list.width - 1;
 	cub->ray.rayDirX = cub->ray.dirX + cub->ray.planeX * cub->ray.cameraX;	// поменял местми plane_x и plane_y
@@ -11,7 +11,7 @@ static void	 wall_cast(t_cub *cub, int x)
 	cub->ray.mapX = (int)cub->ray.playerX;
 }
 
-static void		calc_steps(t_cub *cub)
+void		calc_steps(t_cub *cub)
 {
 	if (cub->ray.rayDirX < 0)
 	{
@@ -35,7 +35,7 @@ static void		calc_steps(t_cub *cub)
 	}
 }
 
-static void dda(t_cub *cub)
+void dda(t_cub *cub)
 {
 	cub->ray.hit = 0;
 	while (cub->ray.hit == 0)
@@ -61,7 +61,7 @@ static void dda(t_cub *cub)
 			cub->ray.perpWallDist = (cub->ray.mapY - cub->ray.playerY + (1 - cub->ray.stepY) / 2) / cub->ray.rayDirY;
 }
 
-static void chose_txt(t_cub *cub)
+void chose_txt(t_cub *cub)
 {
 	if (cub->ray.side == 0 && cub->ray.rayDirX > 0)
 		cub->current = cub->east;
@@ -73,7 +73,7 @@ static void chose_txt(t_cub *cub)
 		cub->current = cub->north;
 } 
 
-static void draw_walls(t_cub *cub, int x)
+void draw_walls(t_cub *cub, int x)
 
 {
 	//Calculate distance of perpendicular ray (Euclidean distance will give fisheye effect!)
@@ -155,7 +155,10 @@ int		ray_casting(t_cub *cub)
 		x++;
 	}
 	cast_sprites(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
+	if (!cub->list.save)
+		mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
+	else
+		screenshot(cub);
 	mlx_destroy_image(cub->mlx, cub->img.img);
 	return (0);
 }
@@ -242,7 +245,7 @@ int key_release(int key, t_cub *cub)
 	return (0);
 }
 
-static void init_txt(t_cub *cub)
+void init_txt(t_cub *cub)
 {
 	cub->north.img = mlx_xpm_file_to_image(cub->mlx, cub->list.no_path, &cub->north.width, &cub->north.height);
 	cub->south.img = mlx_xpm_file_to_image(cub->mlx, cub->list.so_path, &cub->south.width, &cub->south.height);
@@ -261,7 +264,7 @@ static void init_txt(t_cub *cub)
 	cub->sprite.addr = mlx_get_data_addr(cub->sprite.img, &cub->sprite.bits_per_pixel, &cub->sprite.line_length, &cub->sprite.endian);	
 }
 
-void	check_max_res(t_cub *cub)
+void	check_max_res(t_cub *cub)  /// проверка на максимальный размер открываемого окна
 {
 	int max_height;
 	int max_width;
@@ -278,16 +281,12 @@ void	check_max_res(t_cub *cub)
 int	draw(t_cub *cub)
 {
 	cub->mlx = mlx_init();
-	check_max_res(cub); 
-	cub->win = mlx_new_window(cub->mlx, cub->list.width, cub->list.height, "FKNCB");
+	check_max_res(cub);
+	if (!cub->list.save)
+		cub->win = mlx_new_window(cub->mlx, cub->list.width, cub->list.height, "FKNCB");
 	init_txt(cub);
 	ray_casting(cub);
 	cast_sprites(cub);
-	if (cub->list.save == 1)
-	{
-		screenshot(cub);
-		return(0);
-	}
 	mlx_hook(cub->win, 2, 1L<<0, &key_press, cub);
 	mlx_hook(cub->win, 3, 1L<<1, &key_release, cub);
 	// mlx_hook(cub->win, 17, 0L, &exit, cub);
