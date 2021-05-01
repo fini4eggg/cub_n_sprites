@@ -41,3 +41,12 @@ int	 	main(int argc, char **argv)
 		else if ((cub->list.params_fillment))
 			ft_lstadd_back(&head, ft_lstnew(line));
 	}
+		ft_lstadd_back(&head, ft_lstnew(line));
+	cub->map = make_map(&head, ft_lstsize(head));
+	make_rectangle(cub, cub->map);
+	set_player(cub);
+	check_validity(cub->map, cub);
+	// cast_sprites(cub);
+	draw(cub);
+	return (0);
+}
