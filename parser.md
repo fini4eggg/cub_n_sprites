@@ -59,3 +59,5 @@ gcc parser.c get_next_line.c get_next_line.h ft_lstnew.c raycasting.c cub3d.c ft
 	+/- 	выход (esc) после ошибки или выполненного скриншота (V выход по кнопке (ESC), (-) очистка памяти)
 	V 	двивжение иргрока налево/направо
 	  	норма / разбить на функции
+
+	

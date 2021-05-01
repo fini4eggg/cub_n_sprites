@@ -2,43 +2,40 @@
 
 int	 	check_params_fill(t_params *list)
 {
-	if (list->height && list->width && list->no_path \
-	 && list->so_path && list->we_path && list->ea_path\
-	 && list->flclr && list->clclr)
+	if (list->height && list->width && list->no_path
+		&& list->so_path && list->we_path && list->ea_path
+		&& list->flclr && list->clclr)
 		list->params_fillment = 1;
 	return (0);
 }
 
 char	**make_map(t_list **head, int size)
 {
-	char	  **map = ft_calloc(size + 1, sizeof(char *));
-	int		  i;
-	t_list	  *tmp;
+	char	**map;
+	int		i;
+	t_list	*tmp;
 
+	map = ft_calloc(size + 1, sizeof(char *));
+	if (!map)
+		return (0);// ошибка malloc
 	tmp = *head;
 	i = -1;
 	while (tmp)
 	{
 		map[++i] = tmp->content;
-		tmp= tmp->next;
-
+		tmp = tmp->next;
 	}
 	while (map[++i])
 		ft_putendl_fd(map[i], 1);
 	return (map);
 }
 
-int		make_rectangle(t_cub *cub, char **map)
+void	map_w_h(t_cub *cub, char **map)
 {
-	int		i;
-	int		j;
-	int		len;
-	int		maxlen;
-	char	*tmp;
-
-	maxlen = 0;
-	len = 0;
-	tmp = NULL;
+	int			i;
+	static int	len;
+	static int	maxlen;
+	
 	i = -1;
 	while (map[++i])
 	{	
@@ -48,19 +45,30 @@ int		make_rectangle(t_cub *cub, char **map)
 	}
 	cub->map_w = maxlen;
 	cub->map_h = i;
+}
+
+int	make_rectangle(t_cub *cub, char **map)
+{
+	int			i;
+	int			j;
+	char		*tmp;
+	static int	len;
+
+	tmp = NULL;
+	map_w_h(cub, map);
 	i = -1;
 	while (map[++i])
 	{
 		len = ft_strlen(map[i]);
-		if (len < maxlen)
+		if (len < cub->map_w)
 		{
-			tmp = ft_calloc(maxlen + 1, sizeof(char *));
+			tmp = ft_calloc(cub->map_w + 1, sizeof(char *));
 			j = -1;
 			while (map[i][++j])
 			{
 				tmp[j] = map[i][j];
 			}
-			while (j < maxlen)
+			while (j < cub->map_w)
 			{
 				tmp[j] = ' ';
 				j++;
@@ -84,25 +92,21 @@ void	set_player(t_cub *cub)
 		{
 			if ((ft_strchr("NSWE", cub->map[i][j])))
 			{
-				if (cub->map[i][j] == 'N')
+				if (cub->map[i][j] == 'N' || cub->map[i][j] == 'S')
 				{
 					cub->ray.dirX = 0.0;
-					cub->ray.dirY = -1.0;
+					if (cub->map[i][j] == 'N')
+						cub->ray.dirY = -1.0;
+					else
+						cub->ray.dirY = 1.0;
 				}
-				else if (cub->map[i][j] == 'S')
+				else if (cub->map[i][j] == 'W' || cub->map[i][j] == 'E')
 				{
-					cub->ray.dirX = 0.0;
-					cub->ray.dirY = 1.0;
-				}
-				else if (cub->map[i][j] == 'W')
-				{
-					cub->ray.dirX = -1.0;
 					cub->ray.dirY = 0.0;
-				}
-				else
-				{
-					cub->ray.dirX = 1.0;
-					cub->ray.dirY = 0.0;
+					if (cub->map[i][j] == 'W')
+						cub->ray.dirX = -1.0;
+					else
+						cub->ray.dirX = 1.0;
 				}
 				cub->ray.planeX = cub->ray.dirY * -0.66;
 				cub->ray.planeY = cub->ray.dirX * 0.66;
