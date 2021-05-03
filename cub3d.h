@@ -188,5 +188,6 @@ void		cast_sprites(t_cub *cub);
 void		screenshot(t_cub *cub);
 
 void		stripe (t_cub *cub);
+void 		init_txt_check(t_cub *cub);
 
 #endif
