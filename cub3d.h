@@ -12,8 +12,8 @@
 #include "./libft/libft.h"
 #include "get_next_line.h"
 
-#define r_speed 0.12
-#define m_speed 0.2
+#define g_rspeed 0.12
+#define g_mspeed 0.2
 
 typedef struct	s_params
 {

@@ -138,7 +138,7 @@ int		ray_casting(t_cub *cub)
 {
 	int x;
 	x = 0;
-	
+
 	cub->img.img = mlx_new_image(cub->mlx, cub->list.width, cub->list.height);
 	cub->img.addr = mlx_get_data_addr(cub->img.img, &cub->img.bits_per_pixel, &cub->img.line_length, &cub->img.endian);
 	cub->sprcast.zbuffer = (double *)malloc(sizeof(double) * cub->list.width);
@@ -170,30 +170,30 @@ int	read_keys(t_cub *cub)
 	{
 		if (cub->key.down == 1)
 			angle *= -1;
-		if(cub->map[(int)(cub->ray.playerY + cub->ray.dirY * m_speed * angle)][(int)(cub->ray.playerX)] != '1')
-			cub->ray.playerY += cub->ray.dirY * m_speed * angle;
-		if(cub->map[(int)(cub->ray.playerY)][(int)(cub->ray.playerX + cub->ray.dirX * m_speed * angle)] != '1')
-			cub->ray.playerX += cub->ray.dirX * m_speed * angle;
+		if(cub->map[(int)(cub->ray.playerY + cub->ray.dirY * g_mspeed * angle)][(int)(cub->ray.playerX)] != '1')
+			cub->ray.playerY += cub->ray.dirY * g_mspeed * angle;
+		if(cub->map[(int)(cub->ray.playerY)][(int)(cub->ray.playerX + cub->ray.dirX * g_mspeed * angle)] != '1')
+			cub->ray.playerX += cub->ray.dirX * g_mspeed * angle;
 	}
 	if (cub->key.right || cub->key.left)
 	{
 		if (cub->key.left)
 			angle *= -1;
 		double oldDirX = cub->ray.dirX;
-		cub->ray.dirX = cub->ray.dirX * cos(r_speed * angle) - cub->ray.dirY * sin(r_speed * angle);
-		cub->ray.dirY = oldDirX * sin(r_speed * angle) + cub->ray.dirY * cos(r_speed * angle);
+		cub->ray.dirX = cub->ray.dirX * cos(g_rspeed * angle) - cub->ray.dirY * sin(g_rspeed * angle);
+		cub->ray.dirY = oldDirX * sin(g_rspeed * angle) + cub->ray.dirY * cos(g_rspeed * angle);
 		double oldPlaneX = cub->ray.planeX;
-		cub->ray.planeX = cub->ray.planeX * cos(r_speed * angle) - cub->ray.planeY * sin(r_speed * angle);
-		cub->ray.planeY = oldPlaneX * sin(r_speed * angle) + cub->ray.planeY * cos(r_speed * angle);
+		cub->ray.planeX = cub->ray.planeX * cos(g_rspeed * angle) - cub->ray.planeY * sin(g_rspeed * angle);
+		cub->ray.planeY = oldPlaneX * sin(g_rspeed * angle) + cub->ray.planeY * cos(g_rspeed * angle);
 	}
 	if (cub->key.stepr || cub->key.stepl)
 	{
 		if (cub->key.stepl)
 			angle *= -1;
-		if(cub->map[(int)(cub->ray.playerY + cub->ray.planeY * m_speed * angle)][(int)(cub->ray.playerX)] != '1')
-			cub->ray.playerY += cub->ray.planeY * m_speed * angle;
-		if(cub->map[(int)(cub->ray.playerY)][(int)(cub->ray.playerX + cub->ray.planeX * m_speed * angle)] != '1')
-			cub->ray.playerX += cub->ray.planeX * m_speed * angle;
+		if(cub->map[(int)(cub->ray.playerY + cub->ray.planeY * g_mspeed * angle)][(int)(cub->ray.playerX)] != '1')
+			cub->ray.playerY += cub->ray.planeY * g_mspeed * angle;
+		if(cub->map[(int)(cub->ray.playerY)][(int)(cub->ray.playerX + cub->ray.planeX * g_mspeed * angle)] != '1')
+			cub->ray.playerX += cub->ray.planeX * g_mspeed * angle;
 	}
 	if (cub->key.exit /*|| или кнопка крестик */)
 	{
