@@ -185,7 +185,6 @@ int			draw(t_cub *cub);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		set_sprites(t_cub *cub);
 void		cast_sprites(t_cub *cub);
-// void		create_bmp(t_cub *cub);
 void		screenshot(t_cub *cub);
 
 #endif

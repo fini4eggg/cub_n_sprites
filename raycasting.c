@@ -1,17 +1,19 @@
 #include "cub3d.h"
 
-void	 wall_cast(t_cub *cub, int x)
+void	wall_cast(t_cub *cub, int x)
 {
 	cub->ray.cameraX = 2 * x / (double)cub->list.width - 1;
-	cub->ray.rayDirX = cub->ray.dirX + cub->ray.planeX * cub->ray.cameraX;	// поменял местми plane_x и plane_y
-	cub->ray.rayDirY = cub->ray.dirY + cub->ray.planeY * cub->ray.cameraX;
+	cub->ray.rayDirX = cub->ray.dirX + cub->ray.planeX
+		* cub->ray.cameraX;
+	cub->ray.rayDirY = cub->ray.dirY + cub->ray.planeY
+	* cub->ray.cameraX;
 	cub->ray.deltaDistX = fabs(1 / cub->ray.rayDirX);
 	cub->ray.deltaDistY = fabs(1 / cub->ray.rayDirY);
 	cub->ray.mapY = (int)cub->ray.playerY;
 	cub->ray.mapX = (int)cub->ray.playerX;
 }
 
-void		calc_steps(t_cub *cub)
+void	calc_steps(t_cub *cub)
 {
 	if (cub->ray.rayDirX < 0)
 	{
@@ -35,7 +37,7 @@ void		calc_steps(t_cub *cub)
 	}
 }
 
-void dda(t_cub *cub)
+void	dda(t_cub *cub)
 {
 	cub->ray.hit = 0;
 	while (cub->ray.hit == 0)
@@ -76,11 +78,7 @@ void chose_txt(t_cub *cub)
 void draw_walls(t_cub *cub, int x)
 
 {
-	//Calculate distance of perpendicular ray (Euclidean distance will give fisheye effect!)
-	
-	//Calculate height of line to draw on screen
-	int lineHeight = (int)(cub->list.height / cub->ray.perpWallDist); // 1080 / -0.5 why?
-	// printf("line height: %d\n", lineHeight);
+	int lineHeight = (int)(cub->list.height / cub->ray.perpWallDist);
 	int drawStart = -lineHeight / 2 + cub->list.height / 2;
 	if(drawStart < 0)
 		drawStart = 0;
@@ -140,6 +138,7 @@ int		ray_casting(t_cub *cub)
 {
 	int x;
 	x = 0;
+	
 	cub->img.img = mlx_new_image(cub->mlx, cub->list.width, cub->list.height);
 	cub->img.addr = mlx_get_data_addr(cub->img.img, &cub->img.bits_per_pixel, &cub->img.line_length, &cub->img.endian);
 	cub->sprcast.zbuffer = (double *)malloc(sizeof(double) * cub->list.width);
@@ -202,46 +201,6 @@ int	read_keys(t_cub *cub)
 		// очистка памяти и всех маллоков с массивами
 	}
 	ray_casting(cub);
-	return (0);
-}
-
-int key_press(int key, t_cub *cub)
-{
-	if (key == 13)
-		cub->key.up = 1;
-	if (key == 1)
-		cub->key.down = 1;
-	if (key == 123)
-		cub->key.left = 1;
-	if (key == 124)
-		cub->key.right = 1;
-	if (key == 0)
-		cub->key.stepl = 1;
-	if (key == 2)
-		 cub->key.stepr = 1;
-	if (key == 53)
-		 cub->key.exit = 1;
-	read_keys(cub);
-	return (0);
-}
-
-int key_release(int key, t_cub *cub)
-{
-	if (key == 13)
-		cub->key.up = 0;
-	if (key == 1)
-		cub->key.down = 0;
-	if (key == 123)
-		cub->key.left = 0;
-	if (key == 124)
-		cub->key.right = 0;
-	if (key == 0)	
-		cub->key.stepl = 0;
-	if (key == 2)
-		 cub->key.stepr = 0;
-	if (key == 53)
-		 cub->key.exit = 0;
-	read_keys(cub);
 	return (0);
 }
 
