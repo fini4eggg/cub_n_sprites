@@ -187,4 +187,6 @@ void		set_sprites(t_cub *cub);
 void		cast_sprites(t_cub *cub);
 void		screenshot(t_cub *cub);
 
+void		stripe (t_cub *cub);
+
 #endif

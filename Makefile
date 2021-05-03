@@ -10,6 +10,7 @@ SRCS = cub3d.c\
 		ft_putendl_fd.c\
 		parser.c\
 		keys.c\
+		stripe.c\
 		raycasting.c\
 		save.c\
 		map_validate.c\
