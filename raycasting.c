@@ -6,7 +6,7 @@ void	wall_cast(t_cub *cub, int x)
 	cub->ray.rayDirX = cub->ray.dirX + cub->ray.planeX
 		* cub->ray.cameraX;
 	cub->ray.rayDirY = cub->ray.dirY + cub->ray.planeY
-	* cub->ray.cameraX;
+		* cub->ray.cameraX;
 	cub->ray.deltaDistX = fabs(1 / cub->ray.rayDirX);
 	cub->ray.deltaDistY = fabs(1 / cub->ray.rayDirY);
 	cub->ray.mapY = (int)cub->ray.playerY;
@@ -18,22 +18,26 @@ void	calc_steps(t_cub *cub)
 	if (cub->ray.rayDirX < 0)
 	{
 		cub->ray.stepX = -1;
-		cub->ray.sideDistX = (cub->ray.playerX - cub->ray.mapX) * cub->ray.deltaDistX;
+		cub->ray.sideDistX = (cub->ray.playerX - cub->ray.mapX)
+			* cub->ray.deltaDistX;
 	}
 	else
 	{
 		cub->ray.stepX = 1;
-		cub->ray.sideDistX = (cub->ray.mapX + 1.0 - cub->ray.playerX) * cub->ray.deltaDistX;
+		cub->ray.sideDistX = (cub->ray.mapX + 1.0 - cub->ray.playerX)
+			* cub->ray.deltaDistX;
 	}
 	if (cub->ray.rayDirY < 0)
 	{
 		cub->ray.stepY = -1;
-		cub->ray.sideDistY = (cub->ray.playerY - cub->ray.mapY) * cub->ray.deltaDistY;
+		cub->ray.sideDistY = (cub->ray.playerY - cub->ray.mapY)
+			* cub->ray.deltaDistY;
 	}
 	else
 	{
 		cub->ray.stepY = 1;
-		cub->ray.sideDistY = (cub->ray.mapY + 1.0 - cub->ray.playerY) * cub->ray.deltaDistY;
+		cub->ray.sideDistY = (cub->ray.mapY + 1.0 - cub->ray.playerY)
+			* cub->ray.deltaDistY;
 	}
 }
 
@@ -57,13 +61,15 @@ void	dda(t_cub *cub)
 		if (cub->map[cub->ray.mapY][cub->ray.mapX] == '1') 
 			cub->ray.hit = 1;
 	}
-		if (cub->ray.side == 0)
-			cub->ray.perpWallDist = (cub->ray.mapX - cub->ray.playerX + (1 - cub->ray.stepX) / 2) / cub->ray.rayDirX;
-		else
-			cub->ray.perpWallDist = (cub->ray.mapY - cub->ray.playerY + (1 - cub->ray.stepY) / 2) / cub->ray.rayDirY;
+	if (cub->ray.side == 0)
+		cub->ray.perpWallDist = (cub->ray.mapX - cub->ray.playerX
+				+ (1 - cub->ray.stepX) / 2) / cub->ray.rayDirX;
+	else
+		cub->ray.perpWallDist = (cub->ray.mapY - cub->ray.playerY
+				+ (1 - cub->ray.stepY) / 2) / cub->ray.rayDirY;
 }
 
-void chose_txt(t_cub *cub)
+void	chose_txt(t_cub *cub)
 {
 	if (cub->ray.side == 0 && cub->ray.rayDirX > 0)
 		cub->current = cub->east;
@@ -75,18 +81,23 @@ void chose_txt(t_cub *cub)
 		cub->current = cub->north;
 } 
 
-void draw_walls(t_cub *cub, int x)
+void	draw_walls(t_cub *cub, int x)
 
 {
-	int lineHeight = (int)(cub->list.height / cub->ray.perpWallDist);
-	int drawStart = -lineHeight / 2 + cub->list.height / 2;
-	if(drawStart < 0)
+	int	lineHeight;
+	int	drawStart;
+	int	drawEnd;
+	int	y;
+
+	lineHeight = (int)(cub->list.height / cub->ray.perpWallDist);
+	drawStart = -lineHeight / 2 + cub->list.height / 2;
+	drawEnd = lineHeight / 2 + cub->list.height / 2;
+	if (drawStart < 0)
 		drawStart = 0;
-	int drawEnd = lineHeight / 2 + cub->list.height / 2;
-	if(drawEnd >= cub->list.height) 
+	if (drawEnd >= cub->list.height) 
 		drawEnd = cub->list.height - 1;
 	chose_txt(cub);
-	int y = drawStart;
+	y = drawStart;
 	if (cub->ray.side == 0)
 		cub->ray.wallx = cub->ray.playerY + \
 		cub->ray.perpWallDist * cub->ray.rayDirY;
@@ -134,7 +145,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int		ray_casting(t_cub *cub)
+int	ray_casting(t_cub *cub)
 {
 	int x;
 	x = 0;
