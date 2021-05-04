@@ -17,7 +17,7 @@ char	**make_map(t_list **head, int size)
 
 	map = ft_calloc(size + 1, sizeof(char *));
 	if (!map)
-		return (0);// ошибка malloc
+		return (0);
 	tmp = *head;
 	i = -1;
 	while (tmp)
@@ -25,6 +25,7 @@ char	**make_map(t_list **head, int size)
 		map[++i] = tmp->content;
 		tmp = tmp->next;
 	}
+	free (tmp);
 	while (map[++i])
 		ft_putendl_fd(map[i], 1);
 	return (map);
@@ -35,13 +36,13 @@ void	map_w_h(t_cub *cub, char **map)
 	int			i;
 	static int	len;
 	static int	maxlen;
-	
+
 	i = -1;
 	while (map[++i])
 	{	
 		len = ft_strlen(map[i]);
-		if (len > maxlen)					///				проверить когда будут пустые строки
-			maxlen = len;							///				проверить --//--
+		if (len > maxlen)
+			maxlen = len;
 	}
 	cub->map_w = maxlen;
 	cub->map_h = i;
@@ -65,55 +66,11 @@ int	make_rectangle(t_cub *cub, char **map)
 			tmp = ft_calloc(cub->map_w + 1, sizeof(char *));
 			j = -1;
 			while (map[i][++j])
-			{
 				tmp[j] = map[i][j];
-			}
-			while (j < cub->map_w)
-			{
+			while (j++ < cub->map_w)
 				tmp[j] = ' ';
-				j++;
-			}
 			map[i] = tmp;
 		}
 	}
 	return (0);
-}
-
-void	set_player(t_cub *cub)
-{
-	int 	i;
-	int		j;
-
-	i = -1;
-	while (cub->map[++i])
-	{
-		j = -1;
-		while (cub->map[i][++j] != '\0')
-		{
-			if ((ft_strchr("NSWE", cub->map[i][j])))
-			{
-				if (cub->map[i][j] == 'N' || cub->map[i][j] == 'S')
-				{
-					cub->ray.dirX = 0.0;
-					if (cub->map[i][j] == 'N')
-						cub->ray.dirY = -1.0;
-					else
-						cub->ray.dirY = 1.0;
-				}
-				else if (cub->map[i][j] == 'W' || cub->map[i][j] == 'E')
-				{
-					cub->ray.dirY = 0.0;
-					if (cub->map[i][j] == 'W')
-						cub->ray.dirX = -1.0;
-					else
-						cub->ray.dirX = 1.0;
-				}
-				cub->ray.planeX = cub->ray.dirY * -0.66;
-				cub->ray.planeY = cub->ray.dirX * 0.66;
-				cub->list.player = 1;
-				cub->ray.playerY = i + 0.5; // записываем позицию игрока
-				cub->ray.playerX = j + 0.5;
-			}
-		}
-	}
 }

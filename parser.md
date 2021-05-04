@@ -58,6 +58,34 @@ gcc parser.c get_next_line.c get_next_line.h ft_lstnew.c raycasting.c cub3d.c ft
 	  	обработка ошибок
 	+/- 	выход (esc) после ошибки или выполненного скриншота (V выход по кнопке (ESC), (-) очистка памяти)
 	V 	двивжение иргрока налево/направо
-	  	норма / разбить на функции
+	  	
+		норма / разбить на функции
 
+	cub3d.c 		фиксить / сокращать main
 	
+	read_keys.c 	убрать комменты и вывод ошибок
+	
+	params_check.c 	убрать комменты и вывод ошибок && сократить check_resol
+	
+	path_check.c 	убрать комменты и вывод ошибок
+	
+	path_check2.c 	ок!
+	
+	raycasting.c 	обработать хук на (X)
+	raycasting2.c 	ok!
+	
+	map_validate.c 	ошибка карты (игрок уже есть на карте)
+	
+	save.c 			ок!
+	
+	stripe.c 		убрать комменты и вывод ошибок
+	
+	sprites.c 		ok!
+	
+	draw_line.c 	ok!
+	
+	init.c 			ok!
+	
+	parser.c 		обработать ошибку когда нет карты
+	
+	set_player.c 	ok!

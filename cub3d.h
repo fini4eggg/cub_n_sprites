@@ -129,6 +129,7 @@ typedef struct s_cub
 	void 			*mlx;
 	void 			*win;
 	char			**map;
+	int				str_cnt;
 	int				map_w;
 	int				map_h;
 	t_ray			ray;
@@ -145,6 +146,7 @@ typedef struct s_cub
 	t_spritecast	sprcast;
 	t_bmp			bmp;
 }				t_cub;
+//void	init_cub(t_cub *cub, int argc, char **argv, int *fd);
 // parser.c
 int	 	check_resol_posit(char **res, t_params *list);
 int	 	check_resol(char *line, t_params *list);
@@ -166,7 +168,6 @@ int		check_validity(char **map, t_cub *cub);
 void	ft_init(t_cub *cub);
 // raycasting.c
 void	check_max_res(t_cub *cub);
-void	check_max_res(t_cub *cub);
 void 	init_txt(t_cub *cub);
 int 	key_release(int key, t_cub *cub);
 int 	key_press(int key, t_cub *cub);
@@ -179,15 +180,16 @@ void 	dda(t_cub *cub);
 void	calc_steps(t_cub *cub);
 void	wall_cast(t_cub *cub, int x);
 
-int			get_next_line(int fd, char **line);
-int			ray_casting(t_cub *cub);
-int			draw(t_cub *cub);
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void		set_sprites(t_cub *cub);
-void		cast_sprites(t_cub *cub);
-void		screenshot(t_cub *cub);
+int		get_next_line(int fd, char **line);
+int		ray_casting(t_cub *cub);
+int		draw(t_cub *cub);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	set_sprites(t_cub *cub);
+void	cast_sprites(t_cub *cub);
+void	screenshot(t_cub *cub);
 
-void		stripe (t_cub *cub);
-void 		init_txt_check(t_cub *cub);
+void	stripe (t_cub *cub);
+void 	init_txt_check(t_cub *cub);
+void	ft_free(char **res);
 
 #endif

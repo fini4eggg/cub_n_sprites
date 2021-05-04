@@ -1,6 +1,6 @@
 NAME = libft.a
 
-FLAGS =	-Wall -Wextra -Werror
+FLAGS = -g	-Wall -Wextra -Werror
 
 LIB_INC = $(addprefix $(INCLUDES), libft.h)
 

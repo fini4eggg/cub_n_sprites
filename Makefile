@@ -11,12 +11,17 @@ SRCS = cub3d.c\
 		parser.c\
 		keys.c\
 		stripe.c\
+		draw_line.c\
 		raycasting.c\
+		raycasting2.c\
 		save.c\
 		map_validate.c\
 		params_check.c\
 		path_check.c\
+		path_check2.c\
+		set_player.c\
 		sprites.c\
+		read_keys.c\
 		init.c
 	   
 
@@ -54,4 +59,8 @@ fclean:		clean
 
 re:		fclean all
 
+leaks:
+		valgrind --show-leak-kinds=definite --leak-check=full ./$(NAME) ./map.cub
+
 .PHONY:		all clean fclean re
+.SILENT:
