@@ -191,5 +191,6 @@ void	screenshot(t_cub *cub);
 void	stripe (t_cub *cub);
 void 	init_txt_check(t_cub *cub);
 void	ft_free(char **res);
+int		ft_exit(char *str);
 
 #endif

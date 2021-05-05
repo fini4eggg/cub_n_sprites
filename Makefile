@@ -3,26 +3,27 @@ HEADER = cub3d.h
 SRCS = cub3d.c\
 		get_next_line_utils.c\
 		get_next_line.c\
-		ft_lstadd_back.c\
-		ft_lstlast.c\
-		ft_lstnew.c\
-		ft_lstsize.c\
-		ft_putendl_fd.c\
-		parser.c\
-		keys.c\
-		stripe.c\
-		draw_line.c\
-		raycasting.c\
-		raycasting2.c\
-		save.c\
-		map_validate.c\
-		params_check.c\
-		path_check.c\
-		path_check2.c\
-		set_player.c\
-		sprites.c\
-		read_keys.c\
-		init.c
+		./funk/ft_lstadd_back.c\
+		./funk/ft_lstlast.c\
+		./funk/ft_lstnew.c\
+		./funk/ft_lstsize.c\
+		./funk/ft_putendl_fd.c\
+		./map/parser.c\
+		./raycast/keys.c\
+		./raycast/stripe.c\
+		./raycast/draw_line.c\
+		./raycast/raycasting.c\
+		./raycast/raycasting2.c\
+		./raycast/save.c\
+		./map/map_validate.c\
+		./map/params_check.c\
+		./map/path_check.c\
+		./map/path_check2.c\
+		./map/set_player.c\
+		./raycast/sprites.c\
+		./raycast/read_keys.c\
+		./raycast/init.c\
+		./raycast/exit.c
 	   
 
 OBJS = $(SRCS:.c=.o)
@@ -52,7 +53,8 @@ clean:
 		@make clean -C libft
 		@make clean -C mlx
 		@echo object files removed
-
+run:all
+	./cub3D ./map.cub
 fclean:		clean
 		@$(RM) $(NAME) cub3D.bmp libmlx.dylib
 		@echo executable, dylib and bmp removed

@@ -18,9 +18,9 @@ int	check_intro(t_cub *cub, int argc, char **argv)
 		cub->list.save = 0;
 	}
 	if (argc == 0 || argc > 3)
-		return (0); // проверка на количество аргументов
+		ft_exit("Введено некорректное количество параметров");
 	if (!argv)
-		return (0); // HUY
+		ft_exit("Введен неверный аргумент");
 	cub->sprcast.cnt = 0;
 	return (fd);
 }
@@ -37,10 +37,7 @@ int	main(int argc, char **argv)
 	head = NULL;
 	cub = (t_cub *)ft_calloc(1, sizeof(t_cub));
 	if (cub == NULL)
-	{
-		printf("%s\n", strerror(errno));
-		exit (1);
-	}
+		ft_exit("Ошибка выделения памяти");
 	ft_init(cub);
 	fd = check_intro(cub, argc, argv);
 	while (get_next_line(fd, &line) && fd >= 0)

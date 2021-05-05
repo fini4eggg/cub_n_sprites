@@ -70,15 +70,20 @@ gcc parser.c get_next_line.c get_next_line.h ft_lstnew.c raycasting.c cub3d.c ft
 	path_check.c 	убрать комменты и вывод ошибок
 	
 	path_check2.c 	ок!
+					free(res2)
+					free(res1)
 	
 	raycasting.c 	обработать хук на (X)
+					free(cub->sprcast.zbuffer);
+					free(cub->sprites);
+
 	raycasting2.c 	ok!
 	
 	map_validate.c 	ошибка карты (игрок уже есть на карте)
 	
 	save.c 			ок!
 	
-	stripe.c 		убрать комменты и вывод ошибок
+	stripe.c 		ok!
 	
 	sprites.c 		ok!
 	
@@ -87,5 +92,8 @@ gcc parser.c get_next_line.c get_next_line.h ft_lstnew.c raycasting.c cub3d.c ft
 	init.c 			ok!
 	
 	parser.c 		обработать ошибку когда нет карты
+					free(tmp)
 	
 	set_player.c 	ok!
+
+	exit.c 			дописать выход и очистку 
